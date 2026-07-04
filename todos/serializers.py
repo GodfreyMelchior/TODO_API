@@ -42,7 +42,7 @@ class TodoSerializer(serializers.ModelSerializer):
         model = Todo
         fields = [
             'id', 'title', 'description', 'status',
-            'is_archived', 'created_at', 'due_date',
+            'is_archived', 'created_at', 'due_datetime',
             'is_overdue', 'is_completed'
         ]  # Include some additional fields for read-only purposes
         read_only_fields = ['is_overdue', 'is_completed', 'created_at']

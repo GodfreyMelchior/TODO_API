@@ -1,5 +1,5 @@
 from django.db import models
-from datetime import date
+from django.utils import timezone
 
 # Create your models here.
 
@@ -29,14 +29,14 @@ class Todo(models.Model):
     )
     is_archived = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
-    due_date = models.DateField(default=date.today)
+    due_datetime = models.DateTimeField(default=timezone.now)
     objects = TodoManager() #default manager excluding archived todos
     all_objects = models.Manager() #default manager including archived todos
 
     @property
     def is_overdue(self):
         finished_statuses = [self.Status.COMPLETED, self.Status.CANCELLED]
-        return self.due_date < date.today() and self.status not in finished_statuses
+        return self.due_datetime < timezone.now() and self.status not in finished_statuses
 
     @property
     def is_completed(self):
