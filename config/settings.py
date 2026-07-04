@@ -38,7 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework', #adding rest framework to the installed apps
-    'todos' #adding todos app to the installed apps
+    'django_filters', #adding django filters to the installed apps
+    'todos', #adding todos app to the installed apps
+    'drf_spectacular', #adding drf_spectacular to the installed apps
 ]
 
 MIDDLEWARE = [
@@ -100,7 +102,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
 
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Todo API',
+    'DESCRIPTION': 'TODO API for managing tasks with status and due date. ',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
+}
 # Internationalization
 # https://docs.djangoproject.com/en/6.0/topics/i18n/
 
