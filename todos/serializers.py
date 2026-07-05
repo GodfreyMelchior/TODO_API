@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from datetime import date
+from django.utils import timezone
 from .models import Todo
 
 class TodoSerializer(serializers.ModelSerializer):
@@ -21,7 +21,7 @@ class TodoSerializer(serializers.ModelSerializer):
         #     raise serializers.ValidationError("Due date cannot be in the past.")
         # return value   
 
-        if value < date.today(): #prevent setting due date in the past during creation and update 
+        if value < timezone.now(): #prevent setting due date in the past during creation and update 
             raise serializers.ValidationError("Due date cannot be in the past.")
         return value 
 
